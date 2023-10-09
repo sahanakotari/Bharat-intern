@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        display: block;
+        background-image: linear-gradient(to right,rgba(0.5,0.5,0.5,0.5),rgba(0,0,0,0.5)) ,url(rain.jpg);
+        height:95vh;
+            background-repeat: no-repeat;
+           color: white; 
+           size: 100%;
+           width: auto;
+           position: relative;
+           background-position: cover;
+           
+    
+        }
+        h1 {
+            padding-top: 80px;
+            text-transform: uppercase;
+           
+        }
+        .container {
+            margin:  auto;
+            margin-bottom: 116px;
+            max-width: 300px;
+            padding: 20px;
+            
+            border: 1px solid #020b2a;
+            
+            box-shadow: 10px 10px 10px rgba(112, 140, 185, 0.558);
+
+            border-radius: 5px;
+            background-color: #000000;
+            
+        }
+        .box{
+            
+            border-radius: 5px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        #op {
+            background-color: #aed3eb;
+            
+        }
+        button {
+          
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #81b5dd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temperature Converter</h1>
+    <div class="container">
+        <label for="temperature">Enter Temperature:</label>
+        <input type="number" id="temperature" class="box">
+        <label for="fromScale">From Scale:</label>
+        <select id="fromScale" class="box">
+            <option value="celsius" id="op">Celsius</option>
+            <option value="fahrenheit" id="op">Fahrenheit</option>
+            <option value="kelvin" id="op">Kelvin</option>
+        </select>
+        <label for="toScale">To Scale:</label>
+        <select id="toScale" class="box">
+            <option value="celsius" id="op">Celsius</option>
+            <option value="fahrenheit" id="op">Fahrenheit</option>
+            <option value="kelvin" id="op">Kelvin</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        <p id="result" ></p>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const temperatureInput = document.getElementById('temperature').value;
+            const fromScale = document.getElementById('fromScale').value;
+            const toScale = document.getElementById('toScale').value;
+            let result;
+
+            if (fromScale === 'celsius') {
+                if (toScale === 'fahrenheit') {
+                    result = (temperatureInput * 9/5) + 32;
+                } else if (toScale === 'kelvin') {
+                    result = parseFloat(temperatureInput) + 273.15;
+                } else {
+                    result = temperatureInput;
+                }
+            } else if (fromScale === 'fahrenheit') {
+                if (toScale === 'celsius') {
+                    result = (temperatureInput - 32) * 5/9;
+                } else if (toScale === 'kelvin') {
+                    result = ((temperatureInput - 32) * 5/9) + 273.15;
+                } else {
+                    result = temperatureInput;
+                }
+            } else if (fromScale === 'kelvin') {
+                if (toScale === 'celsius') {
+                    result = temperatureInput - 273.15;
+                } else if (toScale === 'fahrenheit') {
+                    result = ((temperatureInput - 273.15) * 9/5) + 32;
+                } else {
+                    result = temperatureInput;
+                }
+            }
+
+            document.getElementById('result').textContent = `Result: ${result.toFixed(2)} ${toScale}`;
+        }
+    </script>
+</body>
+</html>
